@@ -1,12 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <div class="line"></div>
+    <el-menu
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
+      background-color="#4376a6"
+      text-color="#fff"
+      active-text-color="#fff"
+    >
+      <el-menu-item index="4"
+        ><router-link :to="{ name: 'Home' }"
+          ><img v-bind:src="image" class="img" /></router-link
+      ></el-menu-item>
+      <el-menu-item index="2"
+        ><router-link :to="{ name: 'About' }"> Cars </router-link></el-menu-item
+      >
+    </el-menu>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      image: require("./assets/unnamed.png"),
+    };
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+  },
+};
+</script>
 
 <style>
 #app {
@@ -17,16 +45,10 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.el-menu-demo :active {
+  background-color: #2e6190;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.img {
+  width: 70px;
 }
 </style>
